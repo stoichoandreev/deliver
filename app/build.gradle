@@ -1,0 +1,56 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    defaultConfig {
+        applicationId rootProject.ext.applicationId
+        if (gradle.startParameter.taskNames.contains(":app:assembleDebug")) {
+            minSdkVersion rootProject.ext.minDevSdkVersion
+        } else {
+            minSdkVersion rootProject.ext.minSdkVersion
+        }
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "com.sniper.deliver.MockTestRunner"
+        resConfigs "en"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    androidExtensions {
+        experimental = true
+    }
+}
+
+dependencies {
+
+    api project(":api")
+
+    implementation rootProject.ext.libraries.appCompat
+    implementation rootProject.ext.libraries.material
+    implementation rootProject.ext.libraries.cardView
+    implementation rootProject.ext.libraries.recyclerView
+
+    implementation rootProject.ext.libraries.kotlinStdlib
+    implementation rootProject.ext.libraries.rxAndroid
+
+    implementation rootProject.ext.libraries.lifecycleExtensions
+    implementation rootProject.ext.libraries.lifecycleViewModel
+
+    implementation rootProject.ext.libraries.picasso
+
+    implementation rootProject.ext.libraries.koin
+    implementation rootProject.ext.libraries.koinScope
+    implementation rootProject.ext.libraries.koinExtensions
+
+    commonTestDependencies(it)
+    commonAndroidTestDependencies(it)
+}

@@ -1,0 +1,102 @@
+ext {
+    compileSdkVersion = 28
+    minSdkVersion = 21
+    minDevSdkVersion = 21
+    targetSdkVersion = 28
+    buildToolsVersion  = '28.0.3'
+    applicationId = "com.sniper.deliver"
+}
+ext {
+    //Libs
+    appCompatVersion = '1.1.0-alpha01'
+    cardViewVersion = '1.0.0'
+    recyclerViewVersion = '1.0.0'
+    materialVersion = '1.1.0-alpha02'
+    retrofitVersion = '2.5.0'
+    okhttpLoggingInterceptorVersion = '3.12.0'
+    gsonVersion = '2.8.5'
+    javaRX2Version = '2.2.6'
+    androidRx2Version = '2.1.0'
+    picassoVersion = '2.5.2'
+    koinVersion = '1.0.2'
+    lifecycleVersion = '2.0.0-rc01'
+
+    //Test Libs
+    jUnitVersion = '4.12'
+    mockitoVersion = '2.24.0'
+    powerMockVersion = '2.0.0'
+    jUnitRunnerVersion = '1.1.0'
+    espressoVersion = '3.1.0'
+    assertJVersion = '3.6.2'
+    kotlinMockitoCoreVersion = '2.13.0'
+    kotlinJunitRunnerVersion = '0.3.1'
+    testCoreVersion = '1.0.0'
+}
+ext {
+    libraries = [
+            kotlinStdlib                : "org.jetbrains.kotlin:kotlin-stdlib:$rootProject.ext.kotlin_plugin_version",
+            appCompat                   : "androidx.appcompat:appcompat:$appCompatVersion",
+            cardView                    : "androidx.cardview:cardview:$cardViewVersion",
+            recyclerView                : "androidx.recyclerview:recyclerview:$recyclerViewVersion",
+            material                    : "com.google.android.material:material:$materialVersion",
+
+            rxJava2                     : "io.reactivex.rxjava2:rxjava:$javaRX2Version",
+            rxAndroid                   : "io.reactivex.rxjava2:rxandroid:$androidRx2Version",
+
+            retrofit                    : "com.squareup.retrofit2:retrofit:$retrofitVersion",
+            retrofitGSONConverter       : "com.squareup.retrofit2:converter-gson:$retrofitVersion",
+            retrofitRxAdapter           : "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion",
+            okhttpLoggingInterceptor    : "com.squareup.okhttp3:logging-interceptor:$okhttpLoggingInterceptorVersion",
+            gson                        : "com.google.code.gson:gson:$gsonVersion",
+
+            lifecycleExtensions         : "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion",
+            lifecycleViewModel          : "androidx.lifecycle:lifecycle-viewmodel:$lifecycleVersion",
+
+            picasso                     : "com.squareup.picasso:picasso:$picassoVersion",
+
+            koin                        : "org.koin:koin-android:$koinVersion",
+            koinScope                   : "org.koin:koin-android-scope:$koinVersion",
+            koinExtensions              : "org.koin:koin-core-ext:$koinVersion"
+    ]
+
+    librariesTest = [
+            JUnit                       : "junit:junit:$jUnitVersion",
+            mockitoCore                 : "org.mockito:mockito-core:$mockitoVersion",
+            powerMockCore               : "org.powermock:powermock-core:$powerMockVersion",
+            powerMockModuleJunit4       : "org.powermock:powermock-module-junit4:$powerMockVersion",
+            assertJCore                 : "org.assertj:assertj-core:$assertJVersion",
+
+            espressoContrib             : "androidx.test.espresso:espresso-contrib:${espressoVersion}",
+            espressoCore                : "androidx.test.espresso:espresso-core:${espressoVersion}",
+            espressoIntents             : "androidx.test.espresso:espresso-intents:${espressoVersion}",
+            testRules                   : "androidx.test:rules:$jUnitRunnerVersion",
+            testRunner                  : "androidx.test:runner:$jUnitRunnerVersion",
+            testCore                    : "androidx.test:core:$testCoreVersion",
+
+            kotlinJunitAssertions       : "org.jetbrains.kotlin:kotlin-test-junit:$rootProject.ext.kotlin_plugin_version",
+            kotlinMockitoCore           : "org.mockito:mockito-core:$kotlinMockitoCoreVersion",
+            kotlinJUnitRunner           : "de.jodamob.kotlin:kotlin-runner-junit4:$kotlinJunitRunnerVersion",
+            kotlinMockitoInline         : "org.mockito:mockito-inline:$kotlinMockitoCoreVersion"
+    ]
+}
+
+ext.commonTestDependencies = { dependencies ->
+    dependencies.testImplementation librariesTest.JUnit
+    dependencies.testImplementation librariesTest.mockitoCore
+    dependencies.testImplementation librariesTest.assertJCore
+    dependencies.testImplementation librariesTest.powerMockModuleJunit4
+
+    dependencies.testImplementation librariesTest.kotlinJunitAssertions
+    dependencies.testImplementation librariesTest.kotlinMockitoCore
+    dependencies.testImplementation librariesTest.kotlinJUnitRunner
+    dependencies.testImplementation librariesTest.kotlinMockitoInline
+}
+
+ext.commonAndroidTestDependencies = { dependencies ->
+    dependencies.androidTestImplementation librariesTest.testCore
+    dependencies.androidTestImplementation librariesTest.testRunner
+    dependencies.androidTestImplementation librariesTest.testRules
+    dependencies.androidTestImplementation librariesTest.espressoCore
+    dependencies.androidTestImplementation librariesTest.espressoContrib
+    dependencies.androidTestImplementation librariesTest.espressoIntents
+}

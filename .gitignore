@@ -1,0 +1,14 @@
+*.iml
+*.ser
+*.txt
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+/.idea/caches
+/.idea/caches/build_file_checksums.ser
+/.idea/sonarlint/*
+.DS_Store
+/build
+/captures
+.externalNativeBuild
